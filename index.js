@@ -1,6 +1,7 @@
 // --------------------------------------IMPORTS------------------------------------
 // Dependencies
 const express = require('express');
+const open = require('open');
 // Middlewares
 const helmet = require('helmet');
 const cors = require('cors');
@@ -25,15 +26,21 @@ app.get('/*', (req, res) => {
 const http = require('http');
 const https = require('https');
 const fs = require('fs');
-const sslPath = process.env.SSL_PATH || './certificates'
+const sslPath = process.env.SSL_PATH || null
 
 let optionsSSL
 
 try {
-  optionsSSL = {
-    cert: fs.readFileSync(`${sslPath}/fullchain.pem`),
-    key: fs.readFileSync(`${sslPath}/privkey.pem`)
-  };
+  if(sslPath)
+    optionsSSL = {
+      cert: fs.readFileSync(`${sslPath}/fullchain.pem`),
+      key: fs.readFileSync(`${sslPath}/privkey.pem`)
+    };
+  else
+    optionsSSL = {
+      cert: fs.readFileSync(`./self-signed-certs/certificate.crt`),
+      key: fs.readFileSync(`./self-signed-certs/certificate.key`)
+    };
   console.log('exito cert: ', optionsSSL);
 } catch (error) {
   optionsSSL = {};
@@ -50,4 +57,9 @@ server
   .createServer(options, app)
   .listen(port, () => {
     console.log('https ', trySSL, ' listening to port ' + port + '...')
+    // Open browser on local tests
+    if( !sslPath && trySSL )
+      open(`https://localhost:${port}/`);
+    else if( !trySSL )
+      open(`http://localhost:${port}/`);
   });
