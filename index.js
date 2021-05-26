@@ -2,18 +2,12 @@
 // Dependencies
 const express = require('express');
 const open = require('open');
-// Middlewares
-const helmet = require('helmet');
-const cors = require('cors');
 const path = require('path');
 // -----------------------------------CONFIG-------------------------------
 const app = express();
 const port = process.env.PORT || 4000
 
 // -----------------------------------MIDDLEWARES-------------------------------
-app.use(express.json()); // needed to read req.body
-app.use(helmet()); // for security
-app.use(cors()); // for security
 app.use(express.static(path.join(__dirname, 'dist'))); // serve static files
 
 // -----------------------------------ROUTES-------------------------------
