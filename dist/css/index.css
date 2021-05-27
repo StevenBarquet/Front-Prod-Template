@@ -28641,6 +28641,11 @@ div.ant-typography-edit-content.ant-typography-rtl {
   width: 94%;
   margin: 10px auto 10px auto;
 }
+.store-content-container .label {
+  color: #ffa400;
+  font-size: 17px;
+  text-align: center;
+}
 .store-content-container h4 {
   display: block;
   color: #ffffff;
@@ -28717,9 +28722,6 @@ div.ant-typography-edit-content.ant-typography-rtl {
   border-radius: 2px;
   padding: 10px;
 }
-.store-form-container h4 {
-  color: #ff4d4f;
-}
 .store-form-container h2 {
   text-align: center;
 }
@@ -28728,6 +28730,9 @@ div.ant-typography-edit-content.ant-typography-rtl {
   width: 100%;
   justify-content: center;
   align-items: center;
+}
+.submit-container h4 {
+  color: #ff4d4f;
 }
 .store-all-images {
   width: 87%;
