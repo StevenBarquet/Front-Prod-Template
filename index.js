@@ -9,7 +9,7 @@ const port = process.env.PORT || 4000
 
 // -----------------------------------MIDDLEWARES-------------------------------
 app.use(express.static(path.join(__dirname, 'dist'))); // serve static files
-
+app.use('/master', express.static(path.join(__dirname, 'dist')));
 // -----------------------------------ROUTES-------------------------------
 app.get('/*', (req, res) => {
   // console.log('Path: ', req.path);
