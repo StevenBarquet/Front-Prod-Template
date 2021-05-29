@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "express": "^4.17.1",
+    "connect-history-api-fallback": "^1.6.0",
     "open": "^8.2.0"
   }
 }

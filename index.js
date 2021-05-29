@@ -3,19 +3,21 @@
 const express = require('express');
 const open = require('open');
 const path = require('path');
+const history = require('connect-history-api-fallback');
 // -----------------------------------CONFIG-------------------------------
 const app = express();
 const port = process.env.PORT || 4000
-
+const serveStatic = express.static(path.join(__dirname, 'dist')); // serve static files
+const logs = true;
 // -----------------------------------MIDDLEWARES-------------------------------
-app.use(express.static(path.join(__dirname, 'dist'))); // serve static files
-app.use('/master', express.static(path.join(__dirname, 'dist')));
+const optionsHystory = logs ? { verbose: true } : {};
+app.use(serveStatic);
+app.use(history(optionsHystory));
+app.use(serveStatic);
 // -----------------------------------ROUTES-------------------------------
-app.get('/*', (req, res) => {
-  // console.log('Path: ', req.path);
-  res.sendFile(__dirname + '/dist/index.html');
+app.get('/', (req, res) => {
+  res.render(__dirname + '/dist/index.html');
 });
-
 // -----------------------------------SSL-------------------------------
 const http = require('http');
 const https = require('https');
