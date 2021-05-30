@@ -8,7 +8,7 @@ const history = require('connect-history-api-fallback');
 const app = express();
 const port = process.env.PORT || 4000
 const serveStatic = express.static(path.join(__dirname, 'dist')); // serve static files
-const logs = true;
+const logs = false;
 // -----------------------------------MIDDLEWARES-------------------------------
 const optionsHystory = logs ? { verbose: true } : {};
 app.use(serveStatic);
